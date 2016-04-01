@@ -8,14 +8,13 @@ public class Path {
 	private int start;
 	private int end;
 	private int lenth;
-	private List<Integer> route;
+
 	
-	public Path(Graph graph, int start, int end) {
+	public Path(Graph graph, int start, int end,int length) {
 		this.graph = graph;
 		this.start = start;
 		this.end = end;
-		this.lenth = 0;
-		this.route = new LinkedList<Integer>();
+		this.lenth = length;
 	}
 	
 	public Graph getGraph() {
@@ -33,10 +32,12 @@ public class Path {
 	public void setLenth(int lenth) {
 		this.lenth = lenth;
 	}
-	public List<Integer> getRoute() {
-		return route;
+	public void setStart(int start){
+		this.start = start;
 	}
-	public void setRoute(List<Integer> route) {
-		this.route = route;
+	public void setEnd(int end){
+		this.end = end;
 	}
+
+
 }
