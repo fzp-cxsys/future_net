@@ -30,7 +30,7 @@ public final class Route {
 //			res.setCharAt(res.length() - 1, '\n');
 //		}
 //		return res.toString();
-		Path[] shortest = graph.shortest(0);
+		Path[] shortest = graph.shortest(5);
 //		StringBuffer buffer = new StringBuffer();
 		int[] p = new int[shortest.length];
 //		Path path = shortest[0];

@@ -127,6 +127,7 @@ public class Graph {
 	
 	private Path[]  initPath(int start){
 		Path[] path = new Path[topo.size()];
+		path[start] = new Path(this, start, start, 0);
 		for(int i=0;i<topo.size();i++){
 			if(topo.get(start).get(i) != null){
 				path[i] = new Path(this,topo.get(start).get(i).getSrc(), i,topo.get(start).get(i).getCost());
