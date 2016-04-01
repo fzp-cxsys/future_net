@@ -28,4 +28,5 @@ public class Edge {
 	public int getDest() {
 		return dest;
 	}
+	
 }

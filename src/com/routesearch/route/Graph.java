@@ -87,6 +87,54 @@ public class Graph {
 	}
 	
 	public Path[] shortest(int startVertx){
-		return null;
+		int i,j,mv,minw;
+		Path[] dish = initPath(startVertx);
+		int[] U = new int[topo.size()];
+		for( i=0;i<U.length;i++){
+			U[i] = -1;
+		}
+		U[startVertx] = 1;
+		 Vector<Vector<Edge>>  clone = (Vector<Vector<Edge>>) topo.clone();
+		 clone.get(startVertx).set(startVertx, new Edge(-1, startVertx, startVertx, 0));
+		for(i=0;i<clone.size();i++){
+			if(i == startVertx) continue;
+			minw = Integer.MAX_VALUE;
+			mv = 0;
+			for(j=0;j<clone.size();j++){
+				if(U[j] == -1 && dish[j].getLenth() < minw){
+					mv = j;
+					minw = dish[j].getLenth(); 
+				}
+			}
+			if(mv == 0){
+				break;
+			}
+			U[mv] = 1;
+			for(j=0;j<clone.size();j++){
+//				if(clone.get(j).get(j) == null && dish[j].getLenth()>dish[mv].getLenth() + clone.get(mv).get(j).getCost()){
+				if(U[j] == -1 ){
+					if(clone.get(mv).get(j) != null){
+						if(dish[j].getLenth()>dish[mv].getLenth() + clone.get(mv).get(j).getCost())	{
+							dish[j].setStart(mv);
+							dish[j].setLenth(dish[mv].getLenth()+clone.get(mv).get(j).getCost());							
+						}
+					}
+				}
+			}
+		}
+		return dish;
+	}
+	
+	private Path[]  initPath(int start){
+		Path[] path = new Path[topo.size()];
+		for(int i=0;i<topo.size();i++){
+			if(topo.get(start).get(i) != null){
+				path[i] = new Path(this,topo.get(start).get(i).getSrc(), i,topo.get(start).get(i).getCost());
+			}else{
+				path[i] = new Path(this, start, i, Integer.MAX_VALUE);
+			}
+			path[start].setLenth(0);
+		}
+		return path;
 	}
 }
