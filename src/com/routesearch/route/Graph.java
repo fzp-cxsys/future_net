@@ -85,7 +85,11 @@ public class Graph {
 	public int getDest() {
 		return dest;
 	}
-	
+	/**
+	 * 求最短路径
+	 * @param startVertx
+	 * @return	返回path的数组，path表示其实点到目的点的路径，start表示目的点的前节点，length表示路径长度，起始点不能到达目的点则length为int的最大值
+	 */
 	public Path[] shortest(int startVertx){
 		int i,j,mv,minw;
 		Path[] dish = initPath(startVertx);
@@ -94,13 +98,13 @@ public class Graph {
 			U[i] = -1;
 		}
 		U[startVertx] = 1;
-		 Vector<Vector<Edge>>  clone = (Vector<Vector<Edge>>) topo.clone();
-		 clone.get(startVertx).set(startVertx, new Edge(-1, startVertx, startVertx, 0));
-		for(i=0;i<clone.size();i++){
+//		 Vector<Vector<Edge>>  clone = (Vector<Vector<Edge>>) topo.clone();
+//		 clone.get(startVertx).set(startVertx, new Edge(-1, startVertx, startVertx, 0));
+		for(i=0;i<topo.size();i++){
 			if(i == startVertx) continue;
 			minw = Integer.MAX_VALUE;
 			mv = 0;
-			for(j=0;j<clone.size();j++){
+			for(j=0;j<topo.size();j++){
 				if(U[j] == -1 && dish[j].getLenth() < minw){
 					mv = j;
 					minw = dish[j].getLenth(); 
@@ -110,13 +114,13 @@ public class Graph {
 				break;
 			}
 			U[mv] = 1;
-			for(j=0;j<clone.size();j++){
+			for(j=0;j<topo.size();j++){
 //				if(clone.get(j).get(j) == null && dish[j].getLenth()>dish[mv].getLenth() + clone.get(mv).get(j).getCost()){
 				if(U[j] == -1 ){
-					if(clone.get(mv).get(j) != null){
-						if(dish[j].getLenth()>dish[mv].getLenth() + clone.get(mv).get(j).getCost())	{
+					if(topo.get(mv).get(j) != null){
+						if(dish[j].getLenth()>dish[mv].getLenth() + topo.get(mv).get(j).getCost())	{
 							dish[j].setStart(mv);
-							dish[j].setLenth(dish[mv].getLenth()+clone.get(mv).get(j).getCost());							
+							dish[j].setLenth(dish[mv].getLenth()+topo.get(mv).get(j).getCost());							
 						}
 					}
 				}
