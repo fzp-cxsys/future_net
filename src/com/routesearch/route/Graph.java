@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.Vector;
 
 public class Graph {
+	public static int INFINITY = -1;
+	
 	private Vector<Vector<Edge>> topo;
 	private Set<Integer> demands;
 	private int src;
@@ -98,8 +100,6 @@ public class Graph {
 			U[i] = -1;
 		}
 		U[startVertx] = 1;
-//		 Vector<Vector<Edge>>  clone = (Vector<Vector<Edge>>) topo.clone();
-//		 clone.get(startVertx).set(startVertx, new Edge(-1, startVertx, startVertx, 0));
 		for(i=0;i<topo.size();i++){
 			if(i == startVertx) continue;
 			minw = Integer.MAX_VALUE;
@@ -115,11 +115,10 @@ public class Graph {
 			}
 			U[mv] = 1;
 			for(j=0;j<topo.size();j++){
-//				if(clone.get(j).get(j) == null && dish[j].getLenth()>dish[mv].getLenth() + clone.get(mv).get(j).getCost()){
 				if(U[j] == -1 ){
 					if(topo.get(mv).get(j) != null){
 						if(dish[j].getLenth()>dish[mv].getLenth() + topo.get(mv).get(j).getCost())	{
-							dish[j].setStart(mv);
+							dish[j].setPrevex(mv);
 							dish[j].setLenth(dish[mv].getLenth()+topo.get(mv).get(j).getCost());							
 						}
 					}
