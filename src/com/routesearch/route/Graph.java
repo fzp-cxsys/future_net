@@ -103,14 +103,14 @@ public class Graph {
 		for(i=0;i<topo.size();i++){
 			if(i == startVertx) continue;
 			minw = Integer.MAX_VALUE;
-			mv = 0;
+			mv = -1;
 			for(j=0;j<topo.size();j++){
 				if(U[j] == -1 && dish[j].getLenth() < minw){
 					mv = j;
 					minw = dish[j].getLenth(); 
 				}
 			}
-			if(mv == 0){
+			if(mv == -1){
 				break;
 			}
 			U[mv] = 1;
